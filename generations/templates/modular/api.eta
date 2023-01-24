@@ -1,0 +1,20 @@
+import { Observable } from 'rxjs';
+
+import { Rxios } from 'rxios';
+
+<%
+const { utils, route, config, modelTypes } = it;
+const { _, classNameCase, require } = utils;
+const apiClassName = classNameCase(route.moduleName);
+const routes = route.routes;
+const dataContracts = _.map(modelTypes, 'name');
+%>
+<% if (dataContracts.length) { %>
+import { <%~ dataContracts.join(', ') %> } from './<%~ config.fileNames.dataContracts %>'
+<% } %>
+
+export default class <%= apiClassName %> extends Rxios {
+    <% routes.forEach((route) => { %>
+        <%~ includeFile('./procedure-call.eta', { route, utils, config }) %>
+    <% }) %>
+}
