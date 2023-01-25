@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Schema({ timestamps: true })
-export class App {
+export class Whitelist {
   @ApiProperty()
   @Prop()
   name: string;
@@ -16,6 +16,6 @@ export class App {
   updatedAt?: Date;
 }
 
-export type AppDocument = App & Document;
+export type WhitelistDocument = Whitelist & Document;
 
-export const AppSchema = SchemaFactory.createForClass(App);
+export const WhitelistSchema = SchemaFactory.createForClass(Whitelist);
