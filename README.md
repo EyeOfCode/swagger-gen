@@ -16,6 +16,8 @@ generate api from swagger
 9. use `subscribe` response data
 
 *** if error a babel you can use config nx babel.config.json `"presets": ["@nrwl/web/babel"]`
+*** you can watch api json from `http://localhost/api-json`
+*** you can watch all api from `http://localhost/api`
 ## cmd
 ```
 $npm run gen:api
