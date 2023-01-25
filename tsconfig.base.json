@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@swagger-gen/test": ["libs/test/src/index.ts"],
-      "@generators/api": ["libs/generators-api/api"]
+      "@generators/api": ["libs/generators-api/api"],
+      "@generators/type": ["libs/generators-api/data-contracts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
