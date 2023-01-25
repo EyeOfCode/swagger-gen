@@ -1,22 +1,26 @@
-import styled from '@emotion/styled';
-import NxWelcome from './nx-welcome';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Api from '@generators/api';
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+interface IApp {
+  name: string;
+}
 
 export function App() {
+  const [text, setText] = useState<IApp[]>();
+
   useEffect(() => {
-    const test = new Api();
-    test.AppControllerGetData().subscribe((res) => console.log(res));
+    const connect = new Api();
+    connect.AppControllerGetData().subscribe((res) => setText(res));
   }, []);
 
   return (
-    <StyledApp>
-      <NxWelcome title="client" />
-    </StyledApp>
+    <div>
+      <div>Welcome test gen api</div>
+      {text?.length ? <div>::List App::</div> : null}
+      {text?.map((data) => (
+        <div>{data.name}</div>
+      ))}
+    </div>
   );
 }
 

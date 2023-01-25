@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 // eslint-disable-next-line @typescript-eslint/no-var-requires,@typescript-eslint/typedef
 const rimraf = require('rimraf');
+require('dotenv').config();
 
 // eslint-disable-next-line @typescript-eslint/typedef
 const folderPath = path.join(__dirname, '../libs/generators-api');
@@ -14,7 +15,7 @@ rimraf.sync(folderPath);
 if (!fs.existsSync(folderPath)) {
   fs.mkdirSync(folderPath);
 }
-const swaggerJsonUrl = 'http://0.0.0.0:3333/api-json';
+const swaggerJsonUrl = `${process.env.NX_URI_SERVICE_API}/api-json`;
 generateApi({
   url: swaggerJsonUrl,
   generateRouteTypes: false,
@@ -26,7 +27,7 @@ generateApi({
   templates: path.join(__dirname, './templates/modular'),
   // eslint-disable-next-line @typescript-eslint/typedef
 }).then(({ files }) => {
-  // eslint-disable-next-line @typescript-eslint/typedef
+  // eslint-disable-next-line @typescript-eslint/typedef]
   files.forEach(({ content, name }) => {
     // eslint-disable-next-line @typescript-eslint/typedef
     const kebabCase = name
@@ -34,17 +35,15 @@ generateApi({
       .replace(/\s+/g, '-')
       .toLowerCase();
 
-    if (kebabCase === 'app-cart.ts') {
-      content = content.replace(
-        'delete = (id: string):',
-        'deleteCart = (id: string):'
-      );
-    }
-
     fs.writeFileSync(
       path.join(__dirname, `../libs/generators-api/${kebabCase}`),
       content,
       () => console.log('√ Interfaces created!')
     );
   });
+  fs.createReadStream(
+    path.join(path.join(__dirname, `./templates/base/index.ts`))
+  ).pipe(
+    fs.createWriteStream(path.join(__dirname, `../libs/generators-api/base.ts`))
+  );
 });

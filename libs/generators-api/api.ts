@@ -1,12 +1,18 @@
 import { Observable } from 'rxjs';
 
-import { Rxios } from 'rxios';
+import { Rxios } from './base';
 
-import { CreateAppDto } from './data-contracts';
+import { App, CreateAppDto } from './data-contracts';
 
 export default class Api extends Rxios {
-  AppControllerGetData = (): Observable<void> => this.get<void>(`/api/app`);
+  constructor() {
+    super({ baseURL: process.env.NX_URI_SERVICE_API });
+  }
 
-  AppControllerCreateData = (data: CreateAppDto): Observable<void> =>
-    this.post<void>(`/api/app`, data as unknown as Record<string, unknown>);
+  AppControllerGetData = (): Observable<App[]> => this.get<App[]>(`/api/app`);
+
+  AppControllerCreateData = (data: CreateAppDto): Observable<App> =>
+    this.post<App>(`/api/app`, data as unknown as Record<string, unknown>);
+
+  AppControllerGetDataById = (id: any): Observable<App> => this.get<App>(`/api/app/${id}`);
 }

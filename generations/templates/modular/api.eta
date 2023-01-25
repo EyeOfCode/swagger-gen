@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Rxios } from 'rxios';
+import { Rxios } from './base';
 
 <%
 const { utils, route, config, modelTypes } = it;
@@ -14,6 +14,10 @@ import { <%~ dataContracts.join(', ') %> } from './<%~ config.fileNames.dataCont
 <% } %>
 
 export default class <%= apiClassName %> extends Rxios {
+    constructor() {
+        super({ baseURL: process.env.NX_URI_SERVICE_API });
+    }
+
     <% routes.forEach((route) => { %>
         <%~ includeFile('./procedure-call.eta', { route, utils, config }) %>
     <% }) %>
