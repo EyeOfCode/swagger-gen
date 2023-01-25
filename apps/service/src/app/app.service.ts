@@ -25,4 +25,9 @@ export class AppService {
     const app = await this.appModel.create(data);
     return app;
   }
+
+  async removeAll() {
+    const app = await this.appModel.deleteMany();
+    return app;
+  }
 }

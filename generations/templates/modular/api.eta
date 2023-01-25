@@ -14,9 +14,9 @@ import { <%~ dataContracts.join(', ') %> } from './<%~ config.fileNames.dataCont
 <% } %>
 
 export default class <%= apiClassName %> extends Rxios {
-    constructor() {
-        super({ baseURL: process.env.NX_URI_SERVICE_API });
-    }
+  constructor(token?: string) {
+    super({ baseURL: process.env.NX_URI_SERVICE_API, token });
+  }
 
     <% routes.forEach((route) => { %>
         <%~ includeFile('./procedure-call.eta', { route, utils, config }) %>

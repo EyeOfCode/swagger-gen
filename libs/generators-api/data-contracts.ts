@@ -9,3 +9,8 @@ export interface App {
 export interface CreateAppDto {
   name: string;
 }
+
+export interface SuccessResponse {
+  /** @example "Success!!" */
+  message: string;
+}

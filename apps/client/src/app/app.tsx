@@ -10,6 +10,7 @@ export function App() {
   const connect = new Api();
   const [text, setText] = useState<IApp[]>();
   const [name, setName] = useState<string>();
+  const [message, setMessage] = useState<string>();
 
   useEffect(() => {
     fetchData();
@@ -22,20 +23,39 @@ export function App() {
   const create = () => {
     if (name) {
       const data: CreateAppDto = { name };
-      connect.AppControllerCreateData(data).subscribe(() => fetchData());
+      connect.AppControllerCreateData(data).subscribe(() => {
+        fetchData();
+        setName('');
+      });
     }
+  };
+
+  const remove = () => {
+    const connect = new Api('test token');
+    connect.AppControllerRemoveData().subscribe((res) => {
+      setMessage(res.message);
+      setTimeout(() => setMessage(''), 5000);
+      fetchData();
+    });
   };
 
   return (
     <div>
       <div>Welcome test gen api</div>
       <div style={{ display: 'flex' }}>
-        Input: <input onChange={(res) => setName(res.target.value)} />
-        <button onClick={create}>submit</button>
+        Input:{' '}
+        <input onChange={(res) => setName(res.target.value)} value={name} />
+        <button style={{ backgroundColor: 'green' }} onClick={create}>
+          submit
+        </button>
+        <button style={{ backgroundColor: 'red' }} onClick={remove}>
+          remove
+        </button>
       </div>
-      {text?.length ? <div>::List App::</div> : null}
-      {text?.map((data) => (
-        <div key={data.name}>{data.name}</div>
+      {message ? <div style={{ color: 'blue' }}>{message}</div> : null}
+      <div>::List App::</div>
+      {text?.map((data, index) => (
+        <div key={`${data.name}-${index}`}>{data.name}</div>
       ))}
     </div>
   );

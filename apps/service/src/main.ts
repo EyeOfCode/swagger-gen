@@ -19,6 +19,12 @@ async function bootstrap() {
     .setTitle('API')
     .setDescription('API description')
     .setVersion('1.0')
+    .addBearerAuth({
+      name: 'Authorization',
+      type: 'http',
+      scheme: 'Bearer',
+      bearerFormat: 'Token',
+    })
     .build();
   const document = SwaggerModule.createDocument(app, config);
   fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
