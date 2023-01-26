@@ -1,4 +1,10 @@
-export interface App {
+export interface CreateWhitelistDto {
+  name: string;
+}
+
+export type UpdateWhitelistDto = object;
+
+export interface Project {
   name: string;
   /** @format date-time */
   createdAt: string;

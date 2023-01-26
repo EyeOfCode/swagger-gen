@@ -2,11 +2,10 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
-import { App, AppSchema } from './entities/app.entity';
+import { WhitelistModule } from './whitelist/whitelist.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -22,9 +21,10 @@ import { App, AppSchema } from './entities/app.entity';
       },
       inject: [ConfigService],
     }),
-    MongooseModule.forFeature([{ name: App.name, schema: AppSchema }]),
+    WhitelistModule,
+    ProjectModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

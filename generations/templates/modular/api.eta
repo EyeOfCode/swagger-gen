@@ -19,6 +19,10 @@ export default class <%= apiClassName %> extends Rxios {
   }
 
     <% routes.forEach((route) => { %>
+        <% 
+          if(route.raw.tags.includes('Generate') || route.raw.tags.includes('generate')) {
+        %>
         <%~ includeFile('./procedure-call.eta', { route, utils, config }) %>
+        <% } %>
     <% }) %>
 }

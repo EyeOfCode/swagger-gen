@@ -14,35 +14,35 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { AppService } from './app.service';
+import { ProjectService } from './project.service';
 import { CreateAppDto } from './dto/create-app.dto';
 import { CreateAppResponse } from './response/create.response';
 import { GetListResponse, GetResponse } from './response/get.response';
 import { RemoveAppResponse } from './response/remove.response';
 
-@ApiTags('App')
-@Controller('app')
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+@ApiTags('Project', 'Generate')
+@Controller('project')
+export class ProjectController {
+  constructor(private readonly projectService: ProjectService) {}
 
   @Get()
   @ApiOkResponse(GetListResponse)
   async getData() {
-    return this.appService.find();
+    return this.projectService.find();
   }
 
   @Get('/:id')
   @ApiParam({ name: 'id', required: true })
   @ApiOkResponse(GetResponse)
   async getDataById(@Param() id: string) {
-    return this.appService.findById(id);
+    return this.projectService.findById(id);
   }
 
   @Post()
   @ApiBearerAuth()
   @ApiOkResponse(CreateAppResponse)
   async createData(@Body() data: CreateAppDto) {
-    return this.appService.create(data);
+    return this.projectService.create(data);
   }
 
   // TODO you can move to middleware check auth guard
@@ -50,7 +50,7 @@ export class AppController {
   @ApiBearerAuth()
   @ApiOkResponse(RemoveAppResponse)
   async removeData(@Headers() headers: any) {
-    await this.appService.removeAll();
+    await this.projectService.removeAll();
     return { message: `Success token ${headers.authorization}!!` };
   }
 }

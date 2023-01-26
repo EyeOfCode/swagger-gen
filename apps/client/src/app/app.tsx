@@ -17,13 +17,13 @@ export function App() {
   }, []);
 
   const fetchData = () => {
-    connect.AppControllerGetData().subscribe((res) => setText(res));
+    connect.ProjectControllerGetData().subscribe((res) => setText(res));
   };
 
   const create = () => {
     if (name) {
       const data: CreateAppDto = { name };
-      connect.AppControllerCreateData(data).subscribe(() => {
+      connect.ProjectControllerCreateData(data).subscribe(() => {
         fetchData();
         setName('');
       });
@@ -32,7 +32,7 @@ export function App() {
 
   const remove = () => {
     const connect = new Api('test token');
-    connect.AppControllerRemoveData().subscribe((res) => {
+    connect.ProjectControllerRemoveData().subscribe((res) => {
       setMessage(res.message);
       setTimeout(() => setMessage(''), 5000);
       fetchData();
