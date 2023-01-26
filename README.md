@@ -2,7 +2,7 @@
 
 # SwaggerGenApi
 
-generate api from swagger
+generate api from swagger nx
 
 *** This example is nestjs + react and library directory on folder name `generation`!!
 
@@ -32,3 +32,4 @@ $npm run gen:api
 - rimraf
 - dotenv
 - swagger
+- nx

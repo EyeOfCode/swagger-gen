@@ -9,7 +9,10 @@ const rimraf = require('rimraf');
 require('dotenv').config();
 
 // eslint-disable-next-line @typescript-eslint/typedef
-const folderPath = path.join(__dirname, '../libs/generators-api');
+const folderPath = path.join(
+  __dirname,
+  `${process.env.NX_DIRECTORY_GENERATE_API || '../libs/generators-api'}`
+);
 rimraf.sync(folderPath);
 
 if (!fs.existsSync(folderPath)) {
