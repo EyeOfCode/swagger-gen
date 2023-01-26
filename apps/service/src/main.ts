@@ -27,6 +27,7 @@ async function bootstrap() {
     })
     .build();
   const document = SwaggerModule.createDocument(app, config);
+  console.log(document);
   fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
   SwaggerModule.setup(globalPrefix, app, document);
   await app.listen(port);

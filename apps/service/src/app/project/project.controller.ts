@@ -20,7 +20,7 @@ import { CreateAppResponse } from './response/create.response';
 import { GetListResponse, GetResponse } from './response/get.response';
 import { RemoveAppResponse } from './response/remove.response';
 
-@ApiTags('Project')
+@ApiTags('Project', 'Generate')
 @Controller('project')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}

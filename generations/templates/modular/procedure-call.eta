@@ -41,10 +41,6 @@ const pathTmpl = '`' + path + '`';
 
 
 let methodName = '';
-if(route.raw.tags && route.raw.tags.length>1){
-  methodName=route.raw.tags[route.raw.tags.length-1];
-}
-
 if(methodName===''){
   if(/^deleteOneBase/.test(route.raw.operationId)){
     methodName = 'delete';
@@ -65,8 +61,8 @@ if(methodName===''){
   if(/^createManyBase/.test(route.raw.operationId)){
     methodName = 'createMany';
   }
-
 }
+
 if(methodName === ''){
   const routeParts = route.raw.operationId.split('_');
   methodName = routeParts[0];
