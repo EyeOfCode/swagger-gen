@@ -22,6 +22,7 @@ export class WhitelistController {
     return this.whitelistService.create(createWhitelistDto);
   }
 
+  @ApiTags('Generate')
   @Get()
   findAll() {
     return this.whitelistService.findAll();

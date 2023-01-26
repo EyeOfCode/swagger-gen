@@ -9,6 +9,8 @@ export default class Api extends Rxios {
     super({ baseURL: process.env.NX_URI_SERVICE_API, token });
   }
 
+  WhitelistControllerFindAll = (): Observable<void> => this.get<void>(`/api/whitelist`);
+
   ProjectControllerGetData = (): Observable<Project[]> => this.get<Project[]>(`/api/project`);
 
   ProjectControllerCreateData = (data: CreateAppDto): Observable<Project> =>
