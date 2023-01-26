@@ -3,8 +3,8 @@
 # SwaggerGenApi
 
 generate api from swagger
-*** This example is nestjs + react!!
-*** Library directory on folder name `generation`!!
+
+*** This example is nestjs + react and library directory on folder name `generation`!!
 
 ## step
 1. create service
@@ -18,9 +18,7 @@ generate api from swagger
 9. get function api on client by directory `(libs/generators-api)`
 10. use `subscribe` response data
 
-*** if error a babel you can use config nx babel.config.json `"presets": ["@nrwl/web/babel"]`
-*** you can watch api json from `http://localhost/api-json`
-*** you can watch all api from `http://localhost/api`
+*** if error a babel you can use config nx babel.config.json `"presets": ["@nrwl/web/babel"]`. you can watch api json from `http://localhost/api-json` and you can watch all api from `http://localhost/api`
 ## cmd
 ```
 $npm run gen:api
