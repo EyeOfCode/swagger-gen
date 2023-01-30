@@ -51,6 +51,6 @@ export class ProjectController {
   @ApiOkResponse(RemoveAppResponse)
   async removeData(@Headers() headers: any) {
     await this.projectService.removeAll();
-    return { message: `Success token ${headers.authorization}!!` };
+    return { message: `Success token '${headers.authorization}'!!` };
   }
 }

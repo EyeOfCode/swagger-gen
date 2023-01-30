@@ -7,7 +7,7 @@ interface RequestArgs {
   url: string;
   queryParams?: object;
   payload?: object;
-  token?: string;
+  headers?: object;
 }
 
 enum HttpMethod {
@@ -20,11 +20,11 @@ enum HttpMethod {
 
 export class Rxios {
   private _httpClient: AxiosInstance;
-  private authKey?: string;
+  private headers?: object;
 
-  constructor(options?: { baseURL?: string; token?: string }) {
+  constructor(options?: { baseURL?: string; headers?: object }) {
     this._httpClient = axios.create(options);
-    this.authKey = options?.token;
+    this.headers = options?.headers;
     this._httpClient.interceptors.response.use(
       (response) => {
         return Promise.resolve(response);
@@ -41,33 +41,32 @@ export class Rxios {
 
   private _doReq<T>(args: RequestArgs) {
     const { method, url, queryParams, payload } = args;
-    const token = this.authKey;
     let request: AxiosPromise<T>;
     switch (method) {
       case HttpMethod.GET:
         request = this._httpClient.get<T>(url, {
           params: queryParams,
-          headers: { Authorization: token },
+          headers: { ...this.headers },
         });
         break;
       case HttpMethod.POST:
         request = this._httpClient.post<T>(url, payload, {
-          headers: { Authorization: token },
+          headers: { ...this.headers },
         });
         break;
       case HttpMethod.PUT:
         request = this._httpClient.put<T>(url, payload, {
-          headers: { Authorization: token },
+          headers: { ...this.headers },
         });
         break;
       case HttpMethod.PATCH:
         request = this._httpClient.patch<T>(url, payload, {
-          headers: { Authorization: token },
+          headers: { ...this.headers },
         });
         break;
       case HttpMethod.DELETE:
         request = this._httpClient.delete<T>(url, {
-          headers: { Authorization: token },
+          headers: { ...this.headers },
         });
         break;
     }

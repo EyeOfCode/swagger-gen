@@ -13,7 +13,9 @@ rimraf.sync(folderPath);
 if (!fs.existsSync(folderPath)) {
   fs.mkdirSync(folderPath);
 }
-const swaggerJsonUrl = `${process.env.NX_URI_SERVICE_API}/api-json`;
+const swaggerJsonUrl = `${
+  process.env.NX_URI_SERVICE_API || 'http://localhost:8000'
+}/api-json`;
 generateApi({
   url: swaggerJsonUrl,
   generateRouteTypes: false,

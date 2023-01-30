@@ -5,8 +5,8 @@ import { Rxios } from './base';
 import { CreateAppDto, Project, SuccessResponse } from './data-contracts';
 
 export default class Api extends Rxios {
-  constructor(token?: string) {
-    super({ baseURL: process.env.NX_URI_SERVICE_API, token });
+  constructor(headers?: object) {
+    super({ baseURL: process.env.NX_URI_SERVICE_API || 'http://localhost:8000', headers });
   }
 
   WhitelistControllerFindAll = (): Observable<void> => this.get<void>(`/api/whitelist`);

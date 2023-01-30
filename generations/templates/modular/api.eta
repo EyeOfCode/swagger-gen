@@ -14,13 +14,14 @@ import { <%~ dataContracts.join(', ') %> } from './<%~ config.fileNames.dataCont
 <% } %>
 
 export default class <%= apiClassName %> extends Rxios {
-  constructor(token?: string) {
-    super({ baseURL: process.env.NX_URI_SERVICE_API, token });
+  constructor(headers?: object) {
+    super({ baseURL: process.env.NX_URI_SERVICE_API || 'http://localhost:8000', headers });
   }
 
     <% routes.forEach((route) => { %>
         <% 
-          if(route.raw.tags.includes('Generate') || route.raw.tags.includes('generate')) {
+          const keyGen = process.env.NX_KEY_GENERATE || 'Generate'
+          if(route.raw.tags.includes(keyGen)) {
         %>
         <%~ includeFile('./procedure-call.eta', { route, utils, config }) %>
         <% } %>

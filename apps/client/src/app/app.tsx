@@ -31,7 +31,7 @@ export function App() {
   };
 
   const remove = () => {
-    const connect = new Api('test token');
+    const connect = new Api({ Authorization: 'token' });
     connect.ProjectControllerRemoveData().subscribe((res) => {
       setMessage(res.message);
       setTimeout(() => setMessage(''), 5000);
