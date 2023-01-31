@@ -7,17 +7,17 @@ import {
   Param,
   Delete,
   UseInterceptors,
-  UploadedFile,
   UploadedFiles,
 } from '@nestjs/common';
 import { WhitelistService } from './whitelist.service';
 import { CreateWhitelistDto } from './dto/create-whitelist.dto';
 import { UpdateWhitelistDto } from './dto/update-whitelist.dto';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { ApiConsumes, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import 'multer';
 import { ApiMultiFile } from './decorator/upload.decorator';
+import { UploadAppResponse } from './response/get.response';
 
 @ApiTags('WhiteList')
 @Controller('whitelist')
@@ -34,6 +34,7 @@ export class WhitelistController {
   @ApiConsumes('multipart/form-data')
   @ApiMultiFile()
   @UseInterceptors(FilesInterceptor('files', 5))
+  @ApiOkResponse(UploadAppResponse)
   upload(
     @UploadedFiles()
     files: Express.Multer.File[]
@@ -42,7 +43,6 @@ export class WhitelistController {
     return { message: 'success' };
   }
 
-  @ApiTags('Generate')
   @Get()
   findAll() {
     return this.whitelistService.findAll();
