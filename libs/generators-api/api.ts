@@ -9,14 +9,17 @@ export default class Api extends Rxios {
     super({ baseURL: process.env.NX_URI_SERVICE_API || 'http://localhost:8000', headers });
   }
 
-  WhitelistControllerFindAll = (): Observable<void> => this.get<void>(`/api/whitelist`);
+  getWhitelistControllerFindAll = (): Observable<void> => this.get<void>(`/api/whitelist`);
 
-  ProjectControllerGetData = (): Observable<Project[]> => this.get<Project[]>(`/api/project`);
+  postWhitelistControllerUpload = (data: { files?: File[] }): Observable<void> =>
+    this.post<void>(`/api/whitelist/upload`, data as unknown as Record<string, unknown>);
 
-  ProjectControllerCreateData = (data: CreateAppDto): Observable<Project> =>
+  getProjectControllerGetData = (): Observable<Project[]> => this.get<Project[]>(`/api/project`);
+
+  postProjectControllerCreateData = (data: CreateAppDto): Observable<Project> =>
     this.post<Project>(`/api/project`, data as unknown as Record<string, unknown>);
 
-  ProjectControllerRemoveData = (): Observable<SuccessResponse> => this.delete<SuccessResponse>(`/api/project`);
+  deleteProjectControllerRemoveData = (): Observable<SuccessResponse> => this.delete<SuccessResponse>(`/api/project`);
 
-  ProjectControllerGetDataById = (id: any): Observable<Project> => this.get<Project>(`/api/project/${id}`);
+  getProjectControllerGetDataById = (id: any): Observable<Project> => this.get<Project>(`/api/project/${id}`);
 }

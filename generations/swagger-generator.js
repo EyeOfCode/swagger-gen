@@ -33,7 +33,12 @@ generateApi({
       .toLowerCase();
 
     fs.writeFileSync(
-      path.join(__dirname, `../libs/generators-api/${kebabCase}`),
+      path.join(
+        __dirname,
+        `${
+          process.env.NX_DIRECTORY_GENERATE_API || '../libs/generators-api'
+        }/${kebabCase}`
+      ),
       content,
       () => console.log('√ Interfaces created!')
     );
@@ -41,6 +46,13 @@ generateApi({
   fs.createReadStream(
     path.join(path.join(__dirname, `./templates/base/index.ts`))
   ).pipe(
-    fs.createWriteStream(path.join(__dirname, `../libs/generators-api/base.ts`))
+    fs.createWriteStream(
+      path.join(
+        __dirname,
+        `${
+          process.env.NX_DIRECTORY_GENERATE_API || '../libs/generators-api'
+        }/base.ts`
+      )
+    )
   );
 });

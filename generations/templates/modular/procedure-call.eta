@@ -70,7 +70,7 @@ if(methodName === ''){
     const char = routeParts[1].split("");
     const firstCharacter = char[0].toUpperCase();
     char.shift();
-    methodName = `${routeParts[0]}${firstCharacter}${char.join("")}`
+    methodName = `${route.raw.method}${routeParts[0]}${firstCharacter}${char.join("")}`
   }
   console.log("Genereated:", methodName)
 }
