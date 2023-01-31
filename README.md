@@ -4,7 +4,7 @@
 
 generate api from swagger nx
 
-*** This example is nestjs + react and library directory on folder name `generation`!!
+*** This example is nestjs + react and library directory on folder name `generations`!!
 
 ## step
 1. create service
